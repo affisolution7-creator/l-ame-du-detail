@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Âme du Détail - Site Web Complet & Manifeste</title>
+    <!-- Chargement de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuration personnalisée de Tailwind pour vos couleurs (Ivory Glow et Vivid Blue) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Ivory Glow #ffd699 (Fond principal chaleureux)
+                        'custom-ivory-glow': '#ffd699',
+                        // Vivid Blue #042698 (Texte, Titres et Accents)
+                        'custom-vivid-blue': '#042698',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Styles de base et styles spécifiques à l'e-book -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        /* S'assurer que le corps utilise la couleur de fond spécifiée */
+        body {
+            background-color: #ffd699; /* Ivory Glow */
+            color: #042698; /* Vivid Blue */
+            font-family: 'Inter', sans-serif;
+        }
+        /* Style pour les liens de navigation */
+        .nav-link {
+            transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ffd699; /* Ivory Glow */
+            background-color: #042698; /* Vivid Blue */
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+        }
+        /* Style commun pour les cartes / ombres */
+        .custom-shadow {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Ombre ajustée pour un fond clair */
+        }
+        /* Styles pour les éléments FAQ (cache la réponse par défaut) */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .faq-answer.open {
+            max-height: 500px; /* Assez grand pour contenir la réponse */
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        /* Styles pour l'indicateur de statut de sauvegarde */
+        .status-message {
+            transition: opacity 0.3s ease-in-out;
+            height: 0; /* Assurer qu'il ne prend pas de place */
+        }
+        /* Style pour l'icône FAQ lors de l'ouverture (le 'x' est + tourné de 45deg) */
+        .faq-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .faq-icon.rotate-45 {
+            transform: rotate(45deg);
+        }
+        /* Style pour l'animation de chargement */
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased bg-custom-ivory-glow">
+
+    <!-- 1. BARRE DE NAVIGATION (Header) -->
+    <header class="bg-custom-vivid-blue text-custom-ivory-glow shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Nom de la marque -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold tracking-wider">
+                        <span class="text-custom-ivory-glow">L'Âme du Détail</span>
+                    </a>
+                </div>
+
+                <!-- Menu de Navigation -->
+                <nav class="hidden md:flex space-x-4">
+                    <a href="#accueil" class="nav-link px-4 py-2 font-medium">Accueil</a>
+                    <a href="#a-propos" class="nav-link px-4 py-2 font-medium">À propos</a>
+                    <a href="#notre-offre" class="nav-link px-4 py-2 font-medium">Notre offre</a>
+                    <a href="#contact" class="nav-link px-4 py-2 font-medium">Contact</a>
+                </nav>
+
+                <!-- Bouton Menu Mobile (pour l'exemple) -->
+                <div class="md:hidden">
+                    <button id="menu-button" class="text-custom-ivivid-blue focus:outline-none">
+                        <!-- Utilisation de custom-ivory-glow pour l'icône de menu -->
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- 2. SECTION HÉROÏQUE (Accueil) -->
+        <section id="accueil" class="text-center py-20 md:py-32 bg-white rounded-xl shadow-2xl mb-12 border border-custom-vivid-blue/10">
+            
+            <!-- CONTENEUR DU TITRE (avec bg-custom-ivory-glow/30) -->
+            <div class="max-w-5xl mx-auto p-6 bg-custom-ivory-glow/30 rounded-xl shadow-inner mb-10">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-custom-vivid-blue mb-2 leading-tight">
+                    L'Âme du Détail
+                </h1>
+                <h2 class="text-xl md:text-3xl font-light text-custom-vivid-blue/90 mx-auto italic">
+                    Bienvenue sur la plateforme dédiée à l'art du détail.
+                </h2>
+            </div>
+            <!-- FIN CONTENEUR DU TITRE -->
+
+            <!-- CONTENEUR DU CORPS DE TEXTE (avec bg-custom-ivory-glow/30) -->
+            <div class="max-w-4xl mx-auto px-6 py-6 bg-custom-ivory-glow/30 rounded-xl shadow-inner text-custom-vivid-blue space-y-6 mb-12">
+                <p class="text-xl md:text-2xl font-medium">
+                    Nous croyons que l'unicité ne réside jamais dans les évidences, mais se cache dans les éléments les plus négligés du monde.
+                </p>
+                <p class="text-xl md:text-2xl font-medium">
+                    Ici, chaque nuance compte, et le plus petit détail est la porte d'entrée vers la révélation.
+                </p>
+            </div>
+            <!-- FIN CONTENEUR DU CORPS DE TEXTE -->
+
+            <p class="text-lg md:text-xl font-semibold text-custom-vivid-blue mt-12 mb-6">
+                Êtes-vous prêt à y consacrer votre regard ?
+            </p>
+
+            <button onclick="document.getElementById('notre-offre').scrollIntoView({ behavior: 'smooth' })" class="bg-custom-vivid-blue text-custom-ivory-glow font-bold py-3 px-8 rounded-full text-xl shadow-lg hover:bg-custom-vivid-blue/90 transition duration-300 transform hover:scale-105">
+                Découvrir le Manifeste
+            </button>
+        </section>
+
+        <!-- 3. SECTION À PROPOS - Mise à jour avec le nouveau Manifeste -->
+        <section id="a-propos" class="py-12 md:py-20 bg-white rounded-xl shadow-2xl mb-12 border border-custom-vivid-blue/10">
+            <!-- Titre principal mis à jour -->
+            <h2 class="text-4xl font-bold text-center text-custom-vivid-blue mb-8">À Propos : La Quête de l'Unicité</h2>
+            <div class="max-w-4xl mx-auto px-4 space-y-8">
+
+                <!-- L'Art du Détail : L'Éloge de l'Invisible -->
+                <div class="p-6 bg-custom-ivory-glow/30 rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-semibold text-custom-vivid-blue mb-4 border-b pb-2 border-custom-vivid-blue/20">L'Art du Détail : L'Éloge de l'Invisible</h3>
+                    <p class="text-lg text-custom-vivid-blue/80 mb-4 leading-relaxed">
+                        Vous êtes habitué au grand récit, aux figures imposantes, aux évidences bruyantes. Mais la mission de **L'Art du Détail** est de célébrer la maîtrise de l'attention portée à ce qui est rejeté, relégué et négligé.
+                    </p>
+                    <p class="text-lg text-custom-vivid-blue/80 leading-relaxed">
+                        Car ce sont souvent ces petits détails que le monde choisit d'ignorer qui détiennent l'importance la plus primordiale et même prioritaire. Ils sont les clés qui vous dévoilent les dessous de l'affaire ou de la chose et vous révèlent **l'identité véritable**, celle que l'on ne vous dit pas. L'Art du Détail est la méthode pour y parvenir.
+                    </p>
+                </div>
+
+                <!-- La Cuisine Française : Quand le Détail Fait l'Unicité -->
+                <div class="p-6 bg-custom-ivory-glow/30 rounded-lg shadow-inner">
+                    <h3 class="text-2xl font-semibold text-custom-vivid-blue mb-4 border-b pb-2 border-custom-vivid-blue/20">La Cuisine Française : Quand le Détail Fait l'Unicité</h3>
+                    <p class="text-lg text-custom-vivid-blue/80 mb-4 leading-relaxed">
+                        L'art véritable de la compréhension ne réside pas dans la lecture des titres, mais dans le déchiffrement des **notes de bas de page**. C'est ainsi que nous pouvons trouver la perle rare ou l'unicité de ce que vous désirez.
+                    </p>
+                    <p class="text-lg text-custom-vivid-blue/80 leading-relaxed">
+                        Pour illustrer cette quête, nous avons choisi un terrain d'exploration de renommée mondiale : la **Cuisine Française**. Comment cet art, reconnu au patrimoine immatériel de l'UNESCO, a-t-il bâti son impact global ? Non pas par ses gloires évidentes (les grands chefs, les plats emblématiques), mais par la **rigueur subtile**, le geste infime, la nuance d'une réduction ou d'une cuisson qui révèle le secret de l'excellence et l'âme d'un plat.
+                    </p>
+                </div>
+
+                <!-- Conclusion du Manifeste -->
+                <p class="text-xl font-bold text-center pt-4 text-custom-vivid-blue">
+                    Notre site et notre livre vous offrent cette précieuse clé d'interprétation et la méthode pour pratiquer L'Art du Détail. Ils ne vous apprendront pas seulement l'histoire d'un art, mais à **voir le monde différemment**, pour enfin trouver ce que vous cherchez.
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. SECTION NOTRE OFFRE (Ebook + FAQ UNIQUEMENT) -->
+        <section id="notre-offre" class="py-12 md:py-20 bg-white rounded-xl shadow-2xl mb-12 border border-custom-vivid-blue/10">
+            <h2 class="text-5xl font-extrabold text-center text-custom-vivid-blue mb-16">Notre Excellence à Portée de Main</h2>
+
+            <!-- SUB-SECTION 4.1: LE MANIFESTE EBOOK (HÉRO) -->
+            <div id="manifeste-promo" class="mb-16 p-8 rounded-xl custom-shadow bg-custom-ivory-glow/30 border border-custom-vivid-blue/10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+                    
+                    <!-- Colonne de Texte Héro -->
+                    <div class="md:w-3/5 text-center md:text-left text-custom-vivid-blue/90"> <!-- Utilisation de Vivid Blue/90 pour le corps de texte -->
+                        <h3 class="text-4xl sm:text-5xl font-black leading-tight mb-4 text-custom-vivid-blue">
+                            Le Manifeste qui Redéfinit l'Excellence.
+                        </h3>
+                        <h4 class="text-2xl font-light mb-6 text-custom-vivid-blue italic">
+                            L'Âme du Détail : Redéfinir l'Élitisme Gastronomique
+                        </h4>
+                        <p class="text-lg text-custom-vivid-blue/80 mb-8 max-w-md mx-auto md:mx-0">
+                            Découvrez pourquoi l'intention, l'éthique et le détail invisible sont les seuls marqueurs d'excellence qui ne peuvent être ni copiés ni industrialisés.
+                        </p>
+
+                        <!-- Bouton CTA Principal -->
+                        <a href="https://payhip.com/7LesCodesduRaffin" 
+                            target="_blank"
+                            id="cta-button"
+                            class="inline-block px-10 py-4 text-lg font-bold uppercase tracking-wider rounded-lg transition duration-300 
+                                            bg-custom-vivid-blue text-custom-ivory-glow custom-shadow hover:bg-custom-vivid-blue/90 focus:outline-none focus:ring-4 focus:ring-custom-vivid-blue/50">
+                            <!-- MODIFICATION DU PRIX ICI -->
+                            Accéder au Manifeste (19.99 $ USD)
+                        </a>
+                        <p class="mt-3 text-sm text-custom-vivid-blue/70">Paiement sécurisé et téléchargement immédiat.</p>
+                    </div>
+
+                    <!-- Colonne Couverture E-book (MAJ avec l'image téléchargée) -->
+                    <div class="md:w-2/5 flex flex-col items-center justify-center space-y-4">
+                        <div class="relative">
+                            <!-- Image de prévisualisation. Utilisation de l'image 'Couverture AD.jpg' fournie. -->
+                            <img 
+                                id="coverPreview"
+                                src="/content/uploaded:Couverture AD.jpg-95dab1cd-5896-4855-a49c-8d68abf163a2"
+                                onerror="this.onerror=null; this.src='https://placehold.co/256x384/ffd699/042698?text=L\'ÂME+DU+DÉTAIL';"
+                                alt="Couverture officielle du manifeste L'Âme du Détail" 
+                                class="w-64 h-96 object-cover rounded-xl custom-shadow border-4 border-custom-vivid-blue/50"
+                            />
+                        </div>
+                        <!-- Indication de statut de sauvegarde (maintenu invisible) -->
+                        <p id="statusMessage" class="status-message text-xs font-medium text-custom-vivid-blue/60 opacity-0 h-0"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EBOOK DETAILS: Résumé, Auteur, FAQ -->
+            <div class="space-y-12 text-custom-vivid-blue/90">
+
+                <!-- Section 4.2 - Le Problème et la Solution (Résumé du Manifeste) -->
+                <div class="p-8 rounded-xl custom-shadow bg-custom-ivory-glow/30"> <!-- Changé en /30 -->
+                    <h3 class="text-3xl font-bold text-center mb-6 text-custom-vivid-blue">
+                        Pourquoi ce Manifeste est Crucial.
+                    </h3>
+                    
+                    <div class="space-y-6 text-lg text-custom-vivid-blue/80">
+                        <p>
+                            <span class="text-custom-vivid-blue font-bold">L'ancien luxe est en pleine mutation.</span> La maîtrise technique et l'opulence matérielle sont désormais déplacées par l'avènement de l'Intelligence Artificielle. Si la perfection est en voie d'être automatisée, la véritable excellence doit impérativement se redéfinir.
+                        </p>
+                        <p>
+                            Ce manifeste n'est pas un recueil de recettes. C'est une **boussole philosophique** qui révèle les **codes silencieux** du nouveau raffinement. Il est le guide de ceux qui refusent d'être rattrapés par la norme.
+                        </p>
+                        <p>
+                            <span class="text-custom-vivid-blue font-bold">Leçons Clés :</span> Découvrez pourquoi l'intention, l'éthique et le détail invisible sont les seuls marqueurs d'excellence qui ne peuvent être ni copiés ni industrialisés.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Section 4.3 - L'Auteur - Utilisation du Ivory Glow/30 pour le fond intérieur -->
+                <div class="p-8 rounded-xl custom-shadow border border-custom-vivid-blue/30 bg-custom-ivory-glow/30">
+                    <h3 class="text-2xl font-bold mb-4 text-center text-custom-vivid-blue">
+                        L'Expertise derrière L'Âme du Détail
+                    </h3>
+                    <div class="text-center text-custom-vivid-blue/80 max-w-2xl mx-auto"> <!-- Couleur du texte harmonisée -->
+                        <p class="text-lg font-semibold mb-4 text-custom-vivid-blue">
+                            L'Âme du Détail est l'expression d'un **Penseur** et **Observateur** des **Nouveaux Codes du Luxe**.
+                        </p>
+                        <p class="text-md italic mb-4">
+                            Fort d'une expertise en déchiffrage des pratiques sociales d'élites et de l'Art de Vivre, notre mission est d'offrir une perspective rigoureuse sur l'évolution des codes, de la table royale à l'ère numérique. Nous fournissons des clés de lecture essentielles pour comprendre comment la tradition et l'innovation redéfinissent continuellement l'excellence.
+                        </p>
+                        <p class="mt-4 text-sm font-medium">
+                            Suivez la pensée : <span class="text-custom-vivid-blue font-bold">@LesCodesDuRaffin</span>
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Section 4.4 - Questions Fréquemment Posées (FAQ) -->
+                <div class="p-8 rounded-xl custom-shadow bg-custom-ivory-glow/30"> <!-- Changé en /30 -->
+                    <h3 class="text-3xl font-bold text-center mb-6 text-custom-vivid-blue">
+                        Vos Questions. Nos Réponses.
+                    </h3>
+                    
+                    <div class="space-y-4" id="faq-container">
+                        <!-- FAQ Item 1 -->
+                        <div class="border border-custom-vivid-blue/20 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-4 text-lg font-semibold bg-white text-custom-vivid-blue hover:bg-custom-ivory-glow/50 transition duration-150" data-target="q1"> <!-- Couleur du bouton et du texte harmonisée -->
+                                <span>Ce manifeste est-il uniquement pour le secteur de la gastronomie ?</span>
+                                <span class="faq-icon text-custom-vivid-blue transform transition duration-300">+</span>
+                            </button>
+                            <div id="q1" class="faq-answer p-4 text-custom-vivid-blue/80 bg-white/80"> <!-- Couleur du texte harmonisée, fond légèrement blanc opaque -->
+                                <p>Absolument pas. Bien que l'inspiration vienne souvent de l'élitisme gastronomique, les principes d'intention, d'éthique et d'attention au détail s'appliquent à tout domaine du **luxe, de l'artisanat, de l'hôtellerie ou de l'entrepreneuriat** qui vise l'excellence et la rareté. C'est une philosophie, pas un guide de cuisine.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 2 -->
+                        <div class="border border-custom-vivid-blue/20 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-4 text-lg font-semibold bg-white text-custom-vivid-blue hover:bg-custom-ivory-glow/50 transition duration-150" data-target="q2">
+                                <span>Sous quel format le manifeste est-il livré ?</span>
+                                <span class="faq-icon text-custom-vivid-blue transform transition duration-300">+</span>
+                            </button>
+                            <div id="q2" class="faq-answer p-4 text-custom-vivid-blue/80 bg-white/80">
+                                <p>Vous recevrez un lien de téléchargement immédiat vers le manifeste au format **PDF** de haute qualité, optimisé pour la lecture sur tous les appareils (ordinateur, tablette, smartphone). Aucune version physique n'est disponible pour le moment.</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Item 3 -->
+                        <div class="border border-custom-vivid-blue/20 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-4 text-lg font-semibold bg-white text-custom-vivid-blue hover:bg-custom-ivory-glow/50 transition duration-150" data-target="q3">
+                                <span>Puis-je partager ce document avec mon équipe ?</span>
+                                <span class="faq-icon text-custom-vivid-blue transform transition duration-300">+</span>
+                            </button>
+                            <div id="q3" class="faq-answer p-4 text-custom-vivid-blue/80 bg-white/80">
+                                <p>Le manifeste est destiné à un usage individuel. Si vous souhaitez l'intégrer à la formation de votre équipe ou en obtenir plusieurs copies, veuillez nous contacter via le lien de contact dans le pied de page pour un tarif de licence de groupe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- 5. SECTION CONTACT -->
+        <section id="contact" class="py-12 md:py-20 bg-custom-vivid-blue/10 rounded-xl shadow-inner mt-12">
+            <h2 class="text-4xl font-bold text-center text-custom-vivid-blue mb-12">Contactez-Nous </h2>
+            <div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-2xl">
+                <form onsubmit="event.preventDefault(); alertModal('Formulaire Soumis', 'Votre message a été envoyé avec succès. Nous vous répondrons bientôt !');">
+                    <div class="mb-4">
+                        <label for="name" class="block text-custom-vivid-blue font-medium mb-2">Nom</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-custom-vivid-blue/30 rounded-lg focus:ring-custom-vivid-blue focus:border-custom-vivid-blue transition duration-200" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-custom-vivid-blue font-medium mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 border border-custom-vivid-blue/30 rounded-lg focus:ring-custom-vivid-blue focus:border-custom-vivid-blue transition duration-200" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-custom-vivid-blue font-medium mb-2">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-2 border border-custom-vivid-blue/30 rounded-lg focus:ring-custom-vivid-blue focus:border-custom-vivid-blue transition duration-200" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-custom-vivid-blue text-custom-ivory-glow font-bold py-3 px-4 rounded-lg text-lg shadow-xl hover:bg-custom-vivid-blue/90 transition duration-300">
+                        Envoyer le Message
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal pour remplacer alert() -->
+    <div id="customAlertModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full text-custom-vivid-blue">
+            <h3 id="modalTitle" class="text-xl font-bold mb-3 border-b pb-2 border-custom-vivid-blue/20"></h3>
+            <p id="modalMessage" class="mb-4"></p>
+            <button onclick="closeAlertModal()" class="w-full bg-custom-vivid-blue text-custom-ivory-glow font-bold py-2 rounded-lg hover:bg-custom-vivid-blue/90 transition duration-300">
+                OK
+            </button>
+        </div>
+    </div>
+
+
+    <!-- 6. PIED DE PAGE (Footer) -->
+    <footer class="bg-custom-vivid-blue text-custom-ivory-glow mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p>&copy; 2025 L'Âme du Détail. Tous droits réservés.</p>
+            <div class="flex justify-center space-x-4 mt-2">
+                <a href="#" class="hover:underline text-custom-ivory-glow/80">Mentions Légales</a>
+                <a href="#" class="hover:underline text-custom-ivory-glow/80">Politique de Confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logique JavaScript pour le FAQ Accordion, la Modale et la Persistance Firebase -->
+    <script type="module">
+        // Importations Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variables globales Firebase (Fournies par l'environnement)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        
+        // URL par défaut de l'image téléchargée
+        const DEFAULT_COVER_URL = "/content/uploaded:Couverture AD.jpg-95dab1cd-5896-4855-a49c-8d68abf163a2";
+
+        let db, auth, userId = null;
+        let isAuthReady = false;
+
+        // Référence au document Firestore pour la couverture
+        const COVER_DOC_ID = 'cover_image';
+        const COVER_COLLECTION_NAME = 'settings';
+
+        // Élément DOM
+        const coverPreview = document.getElementById('coverPreview');
+        const statusMessage = document.getElementById('statusMessage');
+        // displayUserId a été supprimé du DOM et n'est plus nécessaire.
+        const customAlertModal = document.getElementById('customAlertModal');
+
+        // Initialisation de Firebase
+        try {
+            const app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+            setLogLevel('Debug'); // Afficher les logs pour le débogage
+
+            // 1. Authentification et mise à jour de l'état
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    userId = user.uid;
+                } else if (initialAuthToken) {
+                    // Utiliser le token personnalisé si fourni
+                    await signInWithCustomToken(auth, initialAuthToken).catch(e => {
+                        console.error("Firebase Auth Error (Custom Token):", e);
+                        signInAnonymously(auth);
+                    });
+                } else {
+                    // Sinon, se connecter anonymement
+                    await signInAnonymously(auth).catch(e => {
+                        console.error("Firebase Auth Error (Anonymous):", e);
+                    });
+                }
+
+                if (auth.currentUser) {
+                    userId = auth.currentUser.uid;
+                } else {
+                    // Dernier recours si l'authentification échoue ou est anonyme
+                    userId = 'anonymous-' + (typeof crypto !== 'undefined' ? crypto.randomUUID() : Math.random().toString(36).substring(2)); 
+                }
+                
+                // L'affichage de l'ID utilisateur a été supprimé ici
+                isAuthReady = true;
+                console.log(`Firebase Ready. User ID: ${userId}`);
+                
+                // 🚀 ÉTAPE CRUCIALE POUR LA PERSISTANCE : Charger la couverture personnalisée
+                loadCoverFromFirestore();
+            });
+
+        } catch (e) {
+            console.error("Erreur d'initialisation de Firebase :", e);
+        }
+        
+        // ------------------------------------------------------------------
+        // --- Fonctions utilitaires et de Persistance Firebase de l'Image ---
+        // ------------------------------------------------------------------
+
+        /**
+         * Affiche un message de statut temporaire pour l'utilisateur.
+         * Fonction conservée pour le débogage mais ne sera pas appelée pour les statuts par défaut.
+         * @param {string} message Message à afficher.
+         * @param {boolean} isError Vrai si c'est un message d'erreur.
+         */
+        function showStatus(message, isError = false) {
+            statusMessage.textContent = message;
+            statusMessage.classList.remove('opacity-0', 'text-custom-vivid-blue/60', 'text-red-500', 'h-0');
+            statusMessage.classList.add('opacity-100', isError ? 'text-red-500' : 'text-custom-vivid-blue/60', 'h-4');
+            statusMessage.classList.add('animate-pulse');
+
+            // Cacher le message après 3 secondes
+            setTimeout(() => {
+                statusMessage.classList.remove('animate-pulse');
+                statusMessage.classList.remove('opacity-100', 'h-4');
+                statusMessage.classList.add('opacity-0', 'h-0');
+            }, 3000);
+        }
+
+        /**
+         * Construit la référence Firestore pour la collection privée de l'utilisateur.
+         * @returns {object | null} Référence au document Firestore ou null si non prêt.
+         */
+        function getCoverDocRef() {
+            if (!isAuthReady || !userId || !db) {
+                console.error("Firebase non prêt ou userId/db non défini.");
+                return null;
+            }
+            // Utiliser le chemin privé standard : /artifacts/{appId}/users/{userId}/{collectionName}/{docId}
+            return doc(db, `artifacts/${appId}/users/${userId}/${COVER_COLLECTION_NAME}`, COVER_DOC_ID);
+        }
+
+        /**
+         * Charge l'URL de la couverture depuis Firestore et l'affiche.
+         */
+        async function loadCoverFromFirestore() {
+            const docRef = getCoverDocRef();
+            if (!docRef) return;
+
+            try {
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.coverUrl) {
+                        coverPreview.src = data.coverUrl;
+                        console.log("Couverture personnalisée chargée depuis le serveur.");
+                    } else {
+                        // Sauvegarder l'URL par défaut si le document existe mais pas l'URL
+                        await saveCoverToFirestore(DEFAULT_COVER_URL);
+                        console.log("URL de couverture par défaut définie et sauvegardée.");
+                    }
+                } else {
+                    // Sauvegarder l'URL par défaut si le document n'existe pas
+                    await saveCoverToFirestore(DEFAULT_COVER_URL);
+                    console.log("Aucune configuration trouvée. Utilisation de l'image par défaut.");
+                }
+            } catch (error) {
+                console.error("Erreur lors du chargement de la couverture :", error);
+                // On laisse l'image par défaut se charger via l'attribut onerror
+                // showStatus("Erreur de chargement de l'URL personnalisée.", true); // Message silencieux
+            }
+        }
+
+        /**
+         * Sauvegarde l'URL de la couverture dans Firestore.
+         * @param {string} url L'URL de l'image à sauvegarder.
+         */
+        async function saveCoverToFirestore(url) {
+            const docRef = getCoverDocRef();
+            if (!docRef) return;
+
+            try {
+                // Utilisation de setDoc avec merge: true pour créer ou mettre à jour le champ coverUrl
+                await setDoc(docRef, { coverUrl: url, lastUpdated: new Date() }, { merge: true });
+                console.log("URL de couverture sauvegardée dans Firestore:", url);
+            } catch (error) {
+                console.error("Erreur lors de la sauvegarde de la couverture :", error);
+                // showStatus("Erreur de sauvegarde de l'URL.", true); // Message silencieux
+            }
+        }
+
+        // ------------------------------------------------------------------
+        // --- Logique du FAQ (Accordion) et de la Modale ---
+        // ------------------------------------------------------------------
+
+        // Logique de l'Accordéon FAQ
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const answer = document.getElementById(targetId);
+                const icon = button.querySelector('.faq-icon');
+
+                // Fermer toutes les autres réponses
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    if (ans.id !== targetId && ans.classList.contains('open')) {
+                        ans.classList.remove('open');
+                        document.querySelector(`[data-target="${ans.id}"]`).querySelector('.faq-icon').classList.remove('rotate-45');
+                    }
+                });
+
+                // Basculer la réponse actuelle
+                answer.classList.toggle('open');
+                icon.classList.toggle('rotate-45');
+            });
+        });
+
+        // Logique de la Modale pour remplacer alert()
+        window.alertModal = function(title, message) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            customAlertModal.classList.remove('hidden');
+            customAlertModal.classList.add('flex');
+        }
+
+        window.closeAlertModal = function() {
+            customAlertModal.classList.add('hidden');
+            customAlertModal.classList.remove('flex');
+        }
+    </script>
